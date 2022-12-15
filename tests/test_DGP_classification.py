@@ -2,23 +2,31 @@ import unittest
 
 from copy import deepcopy
 import numpy as np
-from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 
 from imodels import HSTreeClassifier
 
 
-def dgp1(n: int = 10, m: int = 2):
+def DGP_classification_1(n: int = 10, m: int = 2):
     # y = x1 > 2
     x = np.random.uniform(0, 4, (n, m))
     y = (x[:,0] > 2)*1
     x += np.random.normal(0, 1, (n, m))
     return x, y
 
-class TestDGPCategorical(unittest.TestCase):
+def DGP_classification_2(n: int = 10, m: int = 2):
+    # y := 2 ; x1 > 3
+    #      1 ; 3 >= x1 > 1
+    #      0 ; 1 >= x1
+    x = np.random.uniform(0, 4, (n, m))
+    y = (1 <= x[:,0])*1 + (3 <= x[:,0])*1
+    x += np.random.normal(0, 0.5, (n, m))
+    return x, y
+
+class TestDGPClassification(unittest.TestCase):
 
     def test_tree_shape(self):
-        X, y = dgp1(20)
+        X, y = DGP_classification_1(20)
 
         for max_leaf_nodes in [3, 5, 7, 9]:
             for reg_param in [0.1, 1, 10, 100]:
@@ -39,10 +47,9 @@ class TestDGPCategorical(unittest.TestCase):
                 np.testing.assert_equal(sk_tree.n_leaves, i_tree.n_leaves)
                 np.testing.assert_equal(sk_tree.max_depth, i_tree.max_depth)
     
-    def test_dgp1_lambda2(self):
-        # Reproducible dataset
+    def test_DGP1_lambda2(self):
         np.random.seed(0)
-        X, y = dgp1(20)
+        X, y = DGP_classification_1(20)
 
         skmodel = DecisionTreeClassifier(max_leaf_nodes=3)
         skmodel.fit(X, y)
@@ -62,10 +69,9 @@ class TestDGPCategorical(unittest.TestCase):
         ])
         np.testing.assert_almost_equal(manual_calculation, i_tree.value, decimal=3)
     
-    def test_dgp1_lambda5(self):
-        # Reproducible dataset
+    def test_DGP1_lambda5(self):
         np.random.seed(1)
-        X, y = dgp1(20)
+        X, y = DGP_classification_1(20)
 
         skmodel = DecisionTreeClassifier(max_leaf_nodes=4)
         skmodel.fit(X, y)
@@ -86,6 +92,7 @@ class TestDGPCategorical(unittest.TestCase):
             [[0.322, 0.678]] # right child of 4 (7)
         ])
         np.testing.assert_almost_equal(manual_calculation, i_tree.value, decimal=3)
+
 
 if __name__ == "__main__":
     unittest.main()
