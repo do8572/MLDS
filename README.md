@@ -1,38 +1,31 @@
-# MLDS
+# Reproducibility chalenge (Claims)
 
-## 1. Reproducibility challenge
+###  1.1 HS improves predictive performance (Fig. 4)
 
-### 1.1. Topics
+### 1.2 Improvements more significant for smaller datasets
 
-* One-shot learning
-* Contrastive learning
-* Reinforcement learning (RL)
-* Generalization to unseen data
-* Active learning
-* NLP
-* CV
-* Graph neural networks
-* NN prunning
+### 1.3 Improvements tend to increase with number of leaves
 
-### 1.2. Papers
+### 1.4 CCP and HS can be used synergistically
 
-We should paste articles we read here, mark which ones we would be interested in reproducing (Domen, David fields) and why - easy to implement, we implemented something similar to the topic Known = (+: both, o: one, -: neither), usable (to topic might be really usable in the future) (+: probably, o: maybe, -: prob. not). 
+### 1.5 use of HS could allow for otherwise undetected groups
 
-| Paper | Link | Domen | David | Easy | Known | Usable | Code | Topics | Journal |
-| ----- | ---- | ----- | ----- | ---- | ----- | ------ | ----| ----| ---- |
-|Countrastive adapters for foundatio model group robustness | | | | | | | | One-shot, contrastive| NeurlIPS |
-| MoCoDA: Counterfactual Data Augmentation | | | | | | | | RL, unseen data | NeurlIPS |
-| Sparsity in continuous depth models NN | | | | | | | | | NeurlIPS |
-| Context-Based Dynamic pricing with partially linear demand | | | + | + | o | + | + | | NeurlIPS |
-| Learning Augmented binary search trees | | | +| + | o | + | + |  | ICML |
-| Combining diverse feature priors | | | | | | | | | ICML |
-| The conmbinatorial Brain Surgeon: Prunning weights that Cancel One Another | | | | | | | | | ICML |
-| Framework for evaluating faithfulness of local explanations | | | | | | | | | ICML |
-| A difference Standardization Method for Mutual Transfer Learning | | | | | | | | | ICML |
-| VILA: Improving structured content extraction from Scientific PDFs using visual Layout Groups | | | | | | | o | | TACL |
-| Gaussian process boosting | | | | | | | + | | JMLR |
+### 1.6 decrease bias^2 + var (Fig. 3)
 
+### 1.7 hsCART outperforms CART (LBS)
 
-## 2. Study article
+### 2.1 HS improves prediction performance of RF (comparison of hs vs mtry vs depth parameters)
 
-*TODO*
+* Tune each hyperparametr via CV and average over 10 random splits
+
+### 2.2 hsRF achieves maximum performance with fewer trees than RF (5 times fewer trees)
+
+### 2.4 hsRF much faster to fit than BART (10 - 15 times faster)
+
+### 3.1 removes sampling artifacts & simplifies boundaries (Fig. 5)
+
+### 3.2 Reduces explanation (SHAP) variance (Fig. 6/7)
+
+### 3.3 makes it easier to interpret model interactions
+
+### 3.4 fitted function is closer to being additive 
