@@ -1,2 +1,6 @@
-data/
-!data/.keep
+.ipynb_checkpoints/
+.vscode/
+__pycache__/
+
+data/*
+!data/iris.csv
