@@ -7,7 +7,7 @@ from sklearn.tree import DecisionTreeClassifier
 from imodels import HSTreeClassifier
 
 
-def DGP_classification_1(n: int = 10, m: int = 2):
+def DGP_classification_1(n: int = 10, m: int = 2) -> tuple[np.ndarray, np.ndarray]:
     # y = x1 > 2
     x = np.random.uniform(0, 4, (n, m))
     y = (x[:,0] > 2)*1
@@ -15,7 +15,7 @@ def DGP_classification_1(n: int = 10, m: int = 2):
     return x, y
 
 
-def DGP_classification_2(n: int = 10, m: int = 2):
+def DGP_classification_2(n: int = 10, m: int = 2) -> tuple[np.ndarray, np.ndarray]:
     # y := 2 ; x1 >= 3
     #      1 ; 3 > x1 >= 1
     #      0 ; 1 > x1
@@ -25,7 +25,7 @@ def DGP_classification_2(n: int = 10, m: int = 2):
     return x, y
 
 
-def DGP_limit_test(n: int = 10, m: int = 2):
+def DGP_limit_test(n: int = 10, m: int = 2) -> tuple[np.ndarray, np.ndarray]:
     # y := 3 ; x1 >= 3 and x2 >= 2
     #      2 ; (x1 >= 3 and 2 > x2) or (x1 >= 1 and x2 >= 2)
     #      1 ; (3 > x1 >= 1 and 2 > x2) or (1 > x1 and x2 >= 2)
@@ -72,8 +72,7 @@ class TestDGPClassification(unittest.TestCase):
 
         Interesting side observation:
            the lambda that is large enough to be considered infinity is linked
-        to the number of data points `n`, and one formula for "infinity" that
-        works well is `lambda = 1e3 * n`.
+        to the number of data points `n`.
         """
         for n in [10, 100, 1000, 10000]:
             for max_leaf_nodes in [3, 5, 7, 9, 11]:
