@@ -29,3 +29,12 @@
 ### 3.3 makes it easier to interpret model interactions
 
 ### 3.4 fitted function is closer to being additive 
+
+# Environment
+
+```bash
+conda create -n mlds python=3.10
+conda activate mlds
+conda install -c conda-forge numpy scikit-learn scipy pandas nb_conda
+pip install imodels pmlb
+```
