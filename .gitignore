@@ -3,5 +3,19 @@
 __pycache__/
 
 src/data/
-data/
-!data/iris.csv
+data/*
+!data/classification
+data/classification/*
+!data/classification/dataset_13_breast-cancer.arff
+!data/classification/diabetes.csv
+!data/classification/haberman.data
+!data/classification/heart.dat
+!data/classification/ionosphere.data
+!data/classification/SouthGermanCredit.asc
+!data/regression
+data/regression/*
+!data/regression/abalone.data
+!data/regression/ca_housing.data
+!data/regression/geographical_music.tsv
+!data/regression/satellite_image.tsv
+!data/regression/winequality-red.csv

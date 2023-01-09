@@ -1,6 +1,8 @@
 import os
 
 import pandas as pd
+import sklearn
+
 
 DATASETS_CLASSIFICATION = {
     "Heart": ("heart", "imodels"),
@@ -111,33 +113,52 @@ IONOSPHERE_COLS_TRANSLATE = {
     **{34: "ionosphere"},
 }
 
-GERMAN_COLS_TRANSLATE = [
-    "status",
-    "duration",
-    "credit_history",
-    "purpose",
-    "amount",
-    "savings",
-    "employment_duration",
-    "installment_rate",
-    "personal_status_sex",
-    "other_debtors",
-    "present_residence",
-    "property",
-    "age",
-    "other_installment_plans",
-    "housing",
-    "number_credits",
-    "job",
-    "people_liable",
-    "telephone",
-    "foreign_worker",
-    "credit_risk",
-]
-GERMAN_COLS_TRANSLATE = {i: v for i, v in enumerate(GERMAN_COLS_TRANSLATE)}
+GERMAN_COLS_TRANSLATE = {
+    0: "status",
+    1: "duration",
+    2: "credit_history",
+    3: "purpose",
+    4: "amount",
+    5: "savings",
+    6: "employment_duration",
+    7: "installment_rate",
+    8: "personal_status_sex",
+    9: "other_debtors",
+    10: "present_residence",
+    11: "property",
+    12: "age",
+    13: "other_installment_plans",
+    14: "housing",
+    15: "number_credits",
+    16: "job",
+    17: "people_liable",
+    18: "telephone",
+    19: "foreign_worker",
+    20: "credit_risk"
+}
+
+ABALONE_COLS_TRANSLATE = {
+    0: "Sex", 1: "Length", 2: "Diameter", 3: "Height", 4: "Whole_weight",
+    5: "Shucked_weight", 6: "Viscera_weight", 7: "Shell_weight", 8: "Rings"
+}
+ABALONE_SEX_TRANSLATE = {
+    "M": 2, "F": 0, "I": 1
+}
+
+HOUSING_COLS_TRANSLATE = {
+    0: "longitude",
+    1: "latitude",
+    2: "housingMedianAge",
+    3: "totalRooms",
+    4: "totalBedrooms",
+    5: "population",
+    6: "households",
+    7: "medianIncome",
+    8: "medianHouseValue"
+}
 
 
-class DatasetClassification:
+class LocalDatasets:
 
     def get_heart() -> pd.DataFrame:
         heart = pd.DataFrame(columns=list(range(len(HEART_COLS_TRANSLATE))))
@@ -223,3 +244,62 @@ class DatasetClassification:
                 german_credit = pd.concat([german_credit, pd.DataFrame.from_dict({i: [v] for i, v in enumerate(params)})], ignore_index=True)
         german_credit = german_credit.rename(GERMAN_COLS_TRANSLATE, axis=1)
         german_credit = german_credit.astype(int)
+
+
+    def get_friedman_1() -> pd.DataFrame:
+        X, y = sklearn.datasets.make_friedman1(200, 10)
+        friedman1 = pd.DataFrame(X)
+        friedman1["target"] = y
+        return friedman1
+
+
+    def get_friedman_3() -> pd.DataFrame:
+        X, y = sklearn.datasets.make_friedman3(200)
+        friedman3 = pd.DataFrame(X)
+        friedman3["target"] = y
+        return friedman3
+    
+    
+    def get_diabetes() -> pd.DataFrame:
+        diabetes_data = sklearn.datasets.load_diabetes(as_frame=True)
+        diabetes = diabetes_data["data"]
+        diabetes["diabetes"] = diabetes_data["target"]
+        return diabetes
+    
+    
+    def get_geographical_music() -> pd.DataFrame:
+        geographical_music = pd.read_csv(os.path.abspath("../data/regression/geographical_music.tsv"), sep="\t")
+        return geographical_music
+    
+    
+    def get_red_wine() -> pd.DataFrame:
+        red_wine = pd.read_csv(os.path.abspath("../data/regression/winequality-red.csv"), sep=";")
+        return red_wine
+    
+    
+    def get_abalone() -> pd.DataFrame:
+        abalone = pd.DataFrame(columns=list(range(len(ABALONE_COLS_TRANSLATE))))
+        with open(os.path.abspath("../data/regression/abalone.data"), "r") as f:
+            for line in f:
+                params = line.strip().split(",")
+                abalone = pd.concat([abalone, pd.DataFrame.from_dict({i: [v] for i, v in enumerate(params)})], ignore_index=True)
+        abalone = abalone.rename(ABALONE_COLS_TRANSLATE, axis=1)
+        abalone["Sex"] = abalone["Sex"].apply(lambda x: ABALONE_SEX_TRANSLATE[x])
+        abalone = abalone.astype(float)
+        return abalone
+    
+    
+    def get_satellite_images() -> pd.DataFrame:
+        satellite = pd.read_csv(os.path.abspath("../data/regression/satellite_image.tsv"), sep="\t")
+        return satellite
+    
+    
+    def get_ca_housing() -> pd.DataFrame:
+        ca_housing = pd.DataFrame(columns=list(range(len(HOUSING_COLS_TRANSLATE))))
+        with open(os.path.abspath("../data/regression/ca_housing.data"), "r") as f:
+            for line in f:
+                params = line.strip().split(",")
+                ca_housing = pd.concat([ca_housing, pd.DataFrame.from_dict({i: [v] for i, v in enumerate(params)})], ignore_index=True)
+        ca_housing = ca_housing.astype(float)
+        ca_housing = ca_housing.rename(HOUSING_COLS_TRANSLATE, axis=1)
+        return ca_housing
