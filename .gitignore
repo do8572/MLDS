@@ -6,11 +6,13 @@ src/data/
 data/*
 !data/classification
 data/classification/*
+!data/classification/compas-scores-two-years.csv
 !data/classification/dataset_13_breast-cancer.arff
 !data/classification/diabetes.csv
 !data/classification/haberman.data
 !data/classification/heart.dat
 !data/classification/ionosphere.data
+!data/classification/juvenile.xpt
 !data/classification/SouthGermanCredit.asc
 !data/regression
 data/regression/*
