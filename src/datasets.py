@@ -136,6 +136,19 @@ GERMAN_COLS_TRANSLATE = {
     19: "foreign_worker",
     20: "credit_risk"
 }
+GERMAN_COLS_MINUS = [
+    "status",
+    "savings",
+    "employment_duration",
+    "personal_status_sex",
+    "other_debtors",
+    "property",
+    "other_installment_plans",
+    "housing",
+    "job",
+    "telephone",
+    "foreign_worker"
+]
 
 ABALONE_COLS_TRANSLATE = {
     0: "Sex", 1: "Length", 2: "Diameter", 3: "Height", 4: "Whole_weight",
@@ -160,7 +173,7 @@ HOUSING_COLS_TRANSLATE = {
 
 class LocalDatasets:
 
-    def get_heart() -> pd.DataFrame:
+    def get_heart_c() -> pd.DataFrame:
         heart = pd.DataFrame(columns=list(range(len(HEART_COLS_TRANSLATE))))
         with open(os.path.abspath("../data/classification/heart.dat"), "r") as f:
             for line in f:
@@ -178,7 +191,7 @@ class LocalDatasets:
         return heart
 
 
-    def get_breast_cancer() -> pd.DataFrame:
+    def get_breast_cancer_c() -> pd.DataFrame:
         breast_cancer = pd.DataFrame(columns=list(range(len(BREAST_COLS_TRANSLATE))))
         with open(os.path.abspath("../data/classification/dataset_13_breast-cancer.arff"), "r") as f:
             header = list()
@@ -204,7 +217,7 @@ class LocalDatasets:
         return breast_cancer
     
 
-    def get_haberman() -> pd.DataFrame:
+    def get_haberman_c() -> pd.DataFrame:
         haberman = pd.DataFrame(columns=list(range(len(HABERMAN_COLS_TRANSLATE))))
         with open(os.path.abspath("../data/classification/haberman.data"), "r") as f:
             for line in f:
@@ -217,7 +230,7 @@ class LocalDatasets:
         return haberman
 
 
-    def get_ionosphere() -> pd.DataFrame:
+    def get_ionosphere_c() -> pd.DataFrame:
         ionosphere = pd.DataFrame(columns=list(range(len(IONOSPHERE_COLS_TRANSLATE))))
         with open(os.path.abspath("../data/classification/ionosphere.data"), "r") as f:
             for line in f:
@@ -230,12 +243,12 @@ class LocalDatasets:
         return ionosphere
     
 
-    def get_diabetes() -> pd.DataFrame:
+    def get_diabetes_c() -> pd.DataFrame:
         diabetes = pd.read_csv(os.path.abspath("../data/classification/diabetes.csv"))
         return diabetes
 
 
-    def get_german_credit() -> pd.DataFrame:
+    def get_german_credit_c() -> pd.DataFrame:
         german_credit = pd.DataFrame(columns=list(range(len(GERMAN_COLS_TRANSLATE))))
         with open(os.path.abspath("../data/classification/SouthGermanCredit.asc"), "r") as f:
             _ = f.readline().strip().split(" ") #skip header, which is in German
@@ -244,40 +257,43 @@ class LocalDatasets:
                 german_credit = pd.concat([german_credit, pd.DataFrame.from_dict({i: [v] for i, v in enumerate(params)})], ignore_index=True)
         german_credit = german_credit.rename(GERMAN_COLS_TRANSLATE, axis=1)
         german_credit = german_credit.astype(int)
+        for col in GERMAN_COLS_MINUS:
+            german_credit[col] = german_credit[col] - 1
+        return german_credit
 
 
-    def get_friedman_1() -> pd.DataFrame:
+    def get_friedman_1_r() -> pd.DataFrame:
         X, y = sklearn.datasets.make_friedman1(200, 10)
         friedman1 = pd.DataFrame(X)
         friedman1["target"] = y
         return friedman1
 
 
-    def get_friedman_3() -> pd.DataFrame:
+    def get_friedman_3_r() -> pd.DataFrame:
         X, y = sklearn.datasets.make_friedman3(200)
         friedman3 = pd.DataFrame(X)
         friedman3["target"] = y
         return friedman3
     
     
-    def get_diabetes() -> pd.DataFrame:
+    def get_diabetes_r() -> pd.DataFrame:
         diabetes_data = sklearn.datasets.load_diabetes(as_frame=True)
         diabetes = diabetes_data["data"]
         diabetes["diabetes"] = diabetes_data["target"]
         return diabetes
     
     
-    def get_geographical_music() -> pd.DataFrame:
+    def get_geographical_music_r() -> pd.DataFrame:
         geographical_music = pd.read_csv(os.path.abspath("../data/regression/geographical_music.tsv"), sep="\t")
         return geographical_music
     
     
-    def get_red_wine() -> pd.DataFrame:
+    def get_red_wine_r() -> pd.DataFrame:
         red_wine = pd.read_csv(os.path.abspath("../data/regression/winequality-red.csv"), sep=";")
         return red_wine
     
     
-    def get_abalone() -> pd.DataFrame:
+    def get_abalone_r() -> pd.DataFrame:
         abalone = pd.DataFrame(columns=list(range(len(ABALONE_COLS_TRANSLATE))))
         with open(os.path.abspath("../data/regression/abalone.data"), "r") as f:
             for line in f:
@@ -289,12 +305,12 @@ class LocalDatasets:
         return abalone
     
     
-    def get_satellite_images() -> pd.DataFrame:
+    def get_satellite_images_r() -> pd.DataFrame:
         satellite = pd.read_csv(os.path.abspath("../data/regression/satellite_image.tsv"), sep="\t")
         return satellite
     
     
-    def get_ca_housing() -> pd.DataFrame:
+    def get_ca_housing_r() -> pd.DataFrame:
         ca_housing = pd.DataFrame(columns=list(range(len(HOUSING_COLS_TRANSLATE))))
         with open(os.path.abspath("../data/regression/ca_housing.data"), "r") as f:
             for line in f:
