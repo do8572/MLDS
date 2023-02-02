@@ -7,8 +7,7 @@ library(tidyverse)
 library(HDInterval)
 library(cowplot)
 
-# set modelling as root
-setwd("~/Documents/FRI/MLDS/repro/MLDS/notebooks/modelling")
+# set modelling folder as root
 
 # specify datasets evaluated
 read.from.vec <- list("./data/reg-hs.csv",    "./data/reg-lbs.csv",     "./data/reg-ccp.csv",    "./data/reg-hsccp.csv",     "./data/reg-mtry.csv",     "./data/reg-dmax.csv",     "./data/reg-hsrf.csv")
