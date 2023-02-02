@@ -32,9 +32,19 @@
 
 # Environment
 
+With conda:
 ```bash
 conda create -n mlds python=3.10
 conda activate mlds
 conda install -c conda-forge numpy scikit-learn scipy pandas nb_conda shap
 pip install imodels pmlb
+```
+
+With virtualenv:
+```bash
+```
+
+# Run tests
+```bash
+python -m unittest discover tests -v
 ```
