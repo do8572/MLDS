@@ -2,9 +2,8 @@
 .vscode/
 __pycache__/
 
-data/
-
 data/*
+!data/README.md
 !data/classification
 data/classification/*
 !data/classification/compas-scores-two-years.csv
