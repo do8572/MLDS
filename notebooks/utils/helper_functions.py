@@ -176,8 +176,8 @@ def likelihood_of_being_better(A, B, rope = 0.005, min_samples = 5):
         return 0.0, 0.0, 0.0
     
     # take 1000 random samples from each model
-    sample_a = np.random.choice(A, 1000)
-    sample_b = np.random.choice(B, 1000)
+    sample_a = np.random.choice(A, 100)
+    sample_b = np.random.choice(B, 100)
     
     # calculate the fraction of times each model is better
     p_better = np.mean((sample_a < sample_b) & (np.abs(sample_a - sample_b) > rope))
@@ -1222,10 +1222,10 @@ def check_best_scores(data, dataset_order, leaf_tol = 2, size_tol = 0.80, rope =
             if len(hs_approx) > size_tol * len(group_improvement) and len(lbs_approx) > size_tol * len(group_improvement):
 
                 # for each regularization method randomly sample from its scores
-                leaf_improvement.loc[(leaf_improvement.dataset == dataset) & (leaf_improvement.n_leaves == n_leaves), "ccp"] = np.random.choice(np.array(group_improvement["ccp"]), len(group_improvement["hs-ccp"]))
-                leaf_improvement.loc[(leaf_improvement.dataset == dataset) & (leaf_improvement.n_leaves == n_leaves), "hs"] = np.random.choice(hs_approx, len(group_improvement["hs"]))
-                leaf_improvement.loc[(leaf_improvement.dataset == dataset) & (leaf_improvement.n_leaves == n_leaves), "lbs"] = np.random.choice(lbs_approx, len(group_improvement["lbs"]))
-                leaf_improvement.loc[(leaf_improvement.dataset == dataset) & (leaf_improvement.n_leaves == n_leaves), "hs-ccp"] = np.random.choice(np.array(group_improvement["hs-ccp"]), len(group_improvement["hs-ccp"]))
+                leaf_improvement.loc[(leaf_improvement.dataset == dataset) & (leaf_improvement.n_leaves == n_leaves), "ccp"] = np.random.choice(np.array(group_improvement["ccp"]), len(group_improvement))
+                leaf_improvement.loc[(leaf_improvement.dataset == dataset) & (leaf_improvement.n_leaves == n_leaves), "hs"] = np.random.choice(hs_approx, len(group_improvement))
+                leaf_improvement.loc[(leaf_improvement.dataset == dataset) & (leaf_improvement.n_leaves == n_leaves), "lbs"] = np.random.choice(lbs_approx, len(group_improvement))
+                leaf_improvement.loc[(leaf_improvement.dataset == dataset) & (leaf_improvement.n_leaves == n_leaves), "hs-ccp"] = np.random.choice(np.array(group_improvement["hs-ccp"]), len(group_improvement))
             else:
 
                 # if size to small trow away data
