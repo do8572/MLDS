@@ -10,8 +10,8 @@ The aim of this repository is to reproduce the claims, presented in paper [Hiera
 For the Python environment, we decided to go with conda. Below is the list of commands to create an environment and install all libraries.
 
 ```bash
-conda create -n mlds python=3.10
-conda activate mlds
+conda create -n rehs python=3.10
+conda activate rehs
 conda install -c conda-forge numpy pandas scikit-learn scikit-optimize scipy nb_conda shap plotnine matplotlib tqdm
 pip install imodels pmlb bartpy
 ```

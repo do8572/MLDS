@@ -1,4 +1,4 @@
-name: mlds
+name: rehs
 channels:
   - conda-forge
   - defaults
