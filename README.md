@@ -7,7 +7,7 @@ For the Python environment, we decided to go with conda. Below is the list of co
 ```bash
 conda create -n mlds python=3.10
 conda activate mlds
-conda install -c conda-forge numpy pandas scikit-learn scikit-optimize scipy nb_conda shap plotnine matplotlib
+conda install -c conda-forge numpy pandas scikit-learn scikit-optimize scipy nb_conda shap plotnine matplotlib tqdm
 pip install imodels pmlb bartpy
 ```
 Since we used two different computers, the environment files from both of them are in the [env](env) folder.

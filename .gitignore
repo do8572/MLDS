@@ -21,3 +21,5 @@ data/regression/*
 !data/regression/geographical_music.tsv
 !data/regression/satellite_image.tsv
 !data/regression/winequality-red.csv
+
+notebooks/experiments/data

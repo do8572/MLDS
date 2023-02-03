@@ -21,6 +21,8 @@ All of the claims that are addressed in the paper with corresponding notebooks a
 
 - [analysis/claim3-bayesian](analysis/claim3-bayesian.ipynb)
 
+The timing code is part of claim 1 and claim 2 code.
+
 ### Claim 4: Hierarchical Shrinkage leads to more intuitive and robust explanations of random forests
 
 - [experiments/claim4 - HS removes sampling artifacts and simplifies boundaries](experiments/claim4%20-%20HS%20removes%20sampling%20artifacts%20and%20simplifies%20boundaries.ipynb)
