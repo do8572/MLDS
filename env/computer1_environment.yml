@@ -215,4 +215,3 @@ dependencies:
       - pmlb==1.0.1.post3
       - seaborn==0.12.2
       - sklearn==0.0.post1
-prefix: C:\Users\dmoho\anaconda3\envs\mlds-test
