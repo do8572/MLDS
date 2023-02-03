@@ -1,5 +1,10 @@
 # [Re] Hierarchical Shrinkage: Improving the Accuracy and Interpretability of Tree-Based Methods
 
+The aim of this repository is to reproduce the claims, presented in paper [Hierarchical Shrinkage: Improving the Accuracy and Interpretability of Tree-Based Methods](agarwal22b.pdf).
+
+> Agarwal, A., Tan, Y.S., Ronen, O., Singh, C. &amp; Yu, B.. (2022). Hierarchical Shrinkage: Improving the accuracy and interpretability of tree-based models.. <i>Proceedings of the 39th International Conference on Machine Learning</i>, in <i>Proceedings of Machine Learning Research</i> 162:111-135 Available from https://proceedings.mlr.press/v162/agarwal22b.html.
+
+
 ## Environment
 
 For the Python environment, we decided to go with conda. Below is the list of commands to create an environment and install all libraries.
